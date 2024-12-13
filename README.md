@@ -193,11 +193,11 @@ class BookPage extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Title'),
             ),
             TextField(
-              controller: controller.des,
+              controller: controller.description,
               decoration: InputDecoration(labelText: 'Description'),
             ),
             TextField(
-              controller: controller.auth,
+              controller: controller.author,
               decoration: InputDecoration(labelText: 'Author'),
             ),
             TextField(
