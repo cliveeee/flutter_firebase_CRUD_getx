@@ -165,3 +165,80 @@ void deleteBook(String bookId) async {
 ```
 
 ---
+### **UI Implementation **
+
+```dart
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'book_controller.dart';
+import 'book_model.dart';
+
+class BookPage extends StatelessWidget {
+  final BookController controller = Get.put(BookController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Books'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+           
+            TextField(
+              controller: controller.title,
+              decoration: InputDecoration(labelText: 'Title'),
+            ),
+            TextField(
+              controller: controller.des,
+              decoration: InputDecoration(labelText: 'Description'),
+            ),
+            TextField(
+              controller: controller.auth,
+              decoration: InputDecoration(labelText: 'Author'),
+            ),
+            TextField(
+              controller: controller.price,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Price'),
+            ),
+            SizedBox(height: 10),
+
+            // Add Book Button
+            ElevatedButton(
+              onPressed: () {
+                controller.createBook();
+              },
+              child: Text('Add Book'),
+            ),
+            SizedBox(height: 20),
+            // List of books
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.bookData.length,
+                  itemBuilder: (context, index) {
+                    BookModel book = controller.bookData[index];
+                    return ListTile(
+                      title: Text(book.title),
+                      subtitle: Text(book.author),
+                      trailing: Text('\$${book.price}'),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+```
+
+---
